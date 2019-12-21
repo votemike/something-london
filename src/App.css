@@ -1,3 +1,4 @@
+/*Non-animation and non-hiding styling*/
 .App {
   text-align: center;
 }
@@ -5,22 +6,16 @@
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  /*align-items: center;*/
-  justify-content: center;
   font-size: calc(10px + 2vmin);
-  /*color: white;*/
 }
 
-/*@keyframes App-logo-spin {*/
-/*  from {*/
-/*    transform: rotate(0deg);*/
-/*  }*/
-/*  to {*/
-/*    transform: rotate(360deg);*/
-/*  }*/
-/*}*/
+.row {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
 
 .column {
   float: left;
@@ -28,8 +23,15 @@
 }
 
 @media (max-width: 600px) {
-  .App-header {
-    justify-content: normal;
+  .blurb {
+    padding: 0 50px;
+  }
+
+  .row.second {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100%;
   }
 
   .column {
@@ -53,7 +55,6 @@
 h2 {
   display: inline-block;
   font-size: 0.8em;
-  /*text-decoration: underline;*/
   border-bottom: 1px silver solid;
 }
 
@@ -61,12 +62,72 @@ h2 {
   font-size: 2.2em;
   text-decoration: none;
   color: silver;
-  /*transition: all .2s ease-in-out;*/
 }
 
+.blurb {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.blurb span {
+  font-weight: bold;
+}
+
+button {
+  margin-top: 18px;
+  border: 3px silver solid;
+  background: transparent;
+  padding: 10px 50px;
+  color: silver;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/*Hiding and animation styling*/
+/*Hover animation*/
 .selection:hover,
 .selection:focus,
 .selection:active{
   transition: all .2s ease-in-out;
   font-size: 2.1em;
 }
+
+/*Button push hiding and animation*/
+.first.hidden {
+  animation: fadeOut ease 1s forwards;
+}
+
+.second.hidden {
+  left: -9999px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity:1;
+  }
+  99% {
+    left: 50%;
+  }
+  100% {
+    left: -9999px;
+    opacity:0;
+  }
+}
+
+.second:not(.hidden) .column {
+  opacity:0;
+  animation: fadeIn ease 2s forwards;
+}
+
+.second .column:nth-child(1) { animation-delay: 1s }
+.second .column:nth-child(2) { animation-delay: 1.5s }
+.second .column:nth-child(3) { animation-delay: 2s }
