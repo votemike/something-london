@@ -76,22 +76,25 @@ class App extends React.Component {
               <div>
                 <h2>play</h2>
               </div>
-              <a target="_blank" rel="noopener noreferrer" href={this.play.href} className="selection">{this.play.name}</a>
+              <a target="_blank" rel="noopener noreferrer" href={this.play.href} className="selection link">{this.play.name}</a>
             </div>
             <div className="column">
               <div>
                 <h2>eat</h2>
               </div>
-              <a target="_blank" rel="noopener noreferrer" href={this.eat.href} className="selection">{this.eat.name}</a>
+              <a target="_blank" rel="noopener noreferrer" href={this.eat.href} className="selection link">{this.eat.name}</a>
             </div>
             <div className="column">
               <div>
                 <h2>drink</h2>
               </div>
-              <a target="_blank" rel="noopener noreferrer" href={this.drink.href} className="selection">{this.drink.name}</a>
+              <a target="_blank" rel="noopener noreferrer" href={this.drink.href} className="selection link">{this.drink.name}</a>
             </div>
           </div>
         </header>
+        <footer>
+          <a href="https://votemike.co.uk" className="link">Contact</a>
+        </footer>
       </div>
     );
   }
