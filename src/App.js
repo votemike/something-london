@@ -63,35 +63,34 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <div className={this.state.showResults ? 'hidden row first' : 'row first'}>
-            {this.blurb}
-            <button onClick={() => {
-              this.setState({ showResults: true })
-            }}>Choose!
-            </button>
+        <h1>Something London</h1>
+        <div className={this.state.showResults ? 'hidden row first' : 'row first'}>
+          {this.blurb}
+          <button onClick={() => {
+            this.setState({ showResults: true })
+          }}>Choose!
+          </button>
+        </div>
+        <div className={this.state.showResults ? 'row second' : 'hidden row second'}>
+          <div className="column">
+            <div>
+              <h2>play</h2>
+            </div>
+            <a target="_blank" rel="noopener noreferrer" href={this.play.href} className="selection link">{this.play.name}</a>
           </div>
-          <div className={this.state.showResults ? 'row second' : 'hidden row second'}>
-            <div className="column">
-              <div>
-                <h2>play</h2>
-              </div>
-              <a target="_blank" rel="noopener noreferrer" href={this.play.href} className="selection link">{this.play.name}</a>
+          <div className="column">
+            <div>
+              <h2>eat</h2>
             </div>
-            <div className="column">
-              <div>
-                <h2>eat</h2>
-              </div>
-              <a target="_blank" rel="noopener noreferrer" href={this.eat.href} className="selection link">{this.eat.name}</a>
-            </div>
-            <div className="column">
-              <div>
-                <h2>drink</h2>
-              </div>
-              <a target="_blank" rel="noopener noreferrer" href={this.drink.href} className="selection link">{this.drink.name}</a>
-            </div>
+            <a target="_blank" rel="noopener noreferrer" href={this.eat.href} className="selection link">{this.eat.name}</a>
           </div>
-        </header>
+          <div className="column">
+            <div>
+              <h2>drink</h2>
+            </div>
+            <a target="_blank" rel="noopener noreferrer" href={this.drink.href} className="selection link">{this.drink.name}</a>
+          </div>
+        </div>
         <footer>
           <a href="https://votemike.co.uk" className="link">Contact</a>
         </footer>
