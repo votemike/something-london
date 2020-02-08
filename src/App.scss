@@ -11,6 +11,12 @@ h1 {
   padding-top: 40px;
 }
 
+h2 {
+  display: inline-block;
+  font-size: 0.8em;
+  border-bottom: 1px silver solid;
+}
+
 footer {
   position: absolute;
   bottom: 20px;
@@ -18,10 +24,10 @@ footer {
   left: 0;
   right: 0;
   font-size: 0.8em;
-}
 
-footer .link:hover {
-  text-decoration: underline;
+  .link:hover {
+    text-decoration: underline;
+  }
 }
 
 .row {
@@ -30,6 +36,13 @@ footer .link:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
+
+  /* Clear floats after the columns */
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }
 
 .column {
@@ -53,24 +66,11 @@ footer .link:hover {
     margin-top: 50px;
     float: none;
     width: 100%;
+
+    &:last-child {
+      margin-bottom: 10px;
+    }
   }
-
-  .column:last-child {
-    margin-bottom: 10px;
-  }
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-h2 {
-  display: inline-block;
-  font-size: 0.8em;
-  border-bottom: 1px silver solid;
 }
 
 .selection {
@@ -85,10 +85,10 @@ h2 {
 .blurb {
   max-width: 800px;
   margin: 0 auto;
-}
 
-.blurb span {
-  font-weight: bold;
+  span {
+    font-weight: bold;
+  }
 }
 
 button {
@@ -115,8 +115,19 @@ button {
   animation: fadeOut ease 1s forwards;
 }
 
-.second.hidden {
-  left: -9999px;
+.second {
+  &.hidden {
+    left: -9999px;
+  }
+
+  &:not(.hidden) .column {
+    opacity:0;
+    animation: fadeIn ease 2s forwards;
+
+    &:nth-child(1) { animation-delay: 1s }
+    &:nth-child(2) { animation-delay: 1.5s }
+    &:nth-child(3) { animation-delay: 2s }
+  }
 }
 
 @keyframes fadeIn {
@@ -140,12 +151,3 @@ button {
     opacity:0;
   }
 }
-
-.second:not(.hidden) .column {
-  opacity:0;
-  animation: fadeIn ease 2s forwards;
-}
-
-.second .column:nth-child(1) { animation-delay: 1s }
-.second .column:nth-child(2) { animation-delay: 1.5s }
-.second .column:nth-child(3) { animation-delay: 2s }
