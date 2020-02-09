@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import Barrel from "./components/Barrel";
 
 class App extends React.Component {
   constructor(props) {
@@ -13,27 +14,27 @@ class App extends React.Component {
       <div>Don't fret or spend hours researching, let us help you out with somewhere fun to play, somewhere delicious to eat and somewhere unique to drink.</div>
     </div>);
     this.blurb = Math.random() >= 0.5 ? shortBlurb : longBlurb;
-    this.drink = this.chooseDrink();
-    this.eat = this.chooseEat();
-    this.play = this.choosePlay();
+    this.drinks = this.chooseDrinks();
+    this.eats = this.chooseEats();
+    this.plays = this.choosePlays();
   }
 
-  chooseDrink() {
+  chooseDrinks() {
     const drinks = [
       { name: 'ABQ', href: 'https://abqlondon.com/abq-london' },
       { name: 'Ballie Ballerson', href: 'https://www.ballieballerson.com/' },
       { name: 'Bobby Fitzpatrick', href: 'https://www.bobbyf.co.uk/' },
       { name: 'Cahoots', href: 'https://www.cahoots-london.com/' },
-      { name: 'Evans & Peel Detective Agency', href: 'http://www.evansandpeel.com/Appointments-Detectives' },
+      // { name: 'Evans & Peel Detective Agency', href: 'http://www.evansandpeel.com/Appointments-Detectives' },
       { name: 'Little Nan\'s Bar', href: 'https://www.littlenans.co.uk/' },
       { name: 'Sky Garden', href: 'https://skygarden.london/' },
       { name: 'WC', href: 'http://www.wcclapham.co.uk/' }
     ];
 
-    return random(drinks);
+    return random(drinks, 6);
   }
 
-  chooseEat() {
+  chooseEats() {
     const eats = [
       { name: 'Bel Canto', href: 'https://www.belcantolondon.co.uk/' },
       { name: 'Bustronome', href: 'https://www.bustronome.com/en/london/' },
@@ -43,10 +44,10 @@ class App extends React.Component {
       { name: 'The Jam', href: 'https://www.thejamrestaurant.com/' }
     ];
 
-    return random(eats);
+    return random(eats, 6);
   }
 
-  choosePlay() {
+  choosePlays() {
     const plays = [
       { name: 'Bounce', href: 'https://www.bouncepingpong.com/' },
       { name: 'Flight Club', href: 'https://flightclubdarts.com/london/' },
@@ -57,7 +58,7 @@ class App extends React.Component {
       { name: 'Whistle Punks', href: 'https://www.whistlepunks.com/' }
     ];
 
-    return random(plays);
+    return random(plays, 6);
   }
 
   render() {
@@ -73,22 +74,16 @@ class App extends React.Component {
         </div>
         <div className={this.state.showResults ? 'row second' : 'hidden row second'}>
           <div className="column">
-            <div>
-              <h2>play</h2>
-            </div>
-            <a target="_blank" rel="noopener noreferrer" href={this.play.href} className="selection link">{this.play.name}</a>
+            <h2>play</h2>
+            <Barrel items={this.plays}/>
           </div>
           <div className="column">
-            <div>
-              <h2>eat</h2>
-            </div>
-            <a target="_blank" rel="noopener noreferrer" href={this.eat.href} className="selection link">{this.eat.name}</a>
+            <h2>eat</h2>
+            <Barrel items={this.eats}/>
           </div>
           <div className="column">
-            <div>
-              <h2>drink</h2>
-            </div>
-            <a target="_blank" rel="noopener noreferrer" href={this.drink.href} className="selection link">{this.drink.name}</a>
+            <h2>drink</h2>
+            <Barrel items={this.drinks}/>
           </div>
         </div>
         <footer>
@@ -99,8 +94,15 @@ class App extends React.Component {
   }
 }
 
-function random(list) {
-    return list[Math.floor((Math.random()*list.length))];
+function random(list, n) {
+  // Shuffle array
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [list[i], list[j]] = [list[j], list[i]];
+  }
+
+  // Get sub-array of first n elements after shuffled
+  return list.slice(0, n);
 }
 
 export default App;

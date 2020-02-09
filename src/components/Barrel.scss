@@ -1,0 +1,43 @@
+@keyframes rotation {
+  from {
+    transform: rotateX(359deg);
+  }
+  to {
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes wobble {
+  25% {
+    transform: rotateX(-3deg);
+  }
+
+  50% {
+    transform: rotateX(2deg);
+  }
+
+  75% {
+    transform: rotateX(-1deg);
+  }
+
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+@mixin barrel($position) {
+  .barrel {
+    animation: rotation 200ms linear 0s 5+($position * 5),
+      rotation 350ms linear 1s+$position 5,
+      rotation 500ms linear 2.75s+$position 1,
+      rotation 750ms linear 3.25s+$position 1,
+      rotation 1000ms linear 4s+$position 1,
+      wobble 200ms step-end 5s+$position 1;
+
+    .side:not(:nth-child(1)) {
+      color: transparent;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      transition: color 1s 5s+$position, text-shadow 1s 5s+$position;
+    }
+  }
+}
